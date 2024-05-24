@@ -9,13 +9,11 @@ namespace GeminiAPICaller.Model.Response.Prompt
 {
     public class GeminiPromptResponse
     {
-
         [JsonProperty("candidates")]
         public List<Candidate> Candidates { get; set; }
 
         [JsonProperty("usageMetadata")]
         public UsageMetadata UsageMetadata { get; set; }
-        // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
 
     }
 }

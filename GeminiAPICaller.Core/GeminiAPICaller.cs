@@ -34,7 +34,6 @@ namespace GeminiAPICaller.Core
 
         async public Task<GeminiPromptResponse?> SendPromptAsync(GeminiPromptMessage message)
         {
-
             GeminiPromptResponse result = null;
             try
             {
