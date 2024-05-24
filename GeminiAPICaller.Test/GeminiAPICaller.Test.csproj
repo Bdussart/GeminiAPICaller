@@ -16,4 +16,9 @@
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GeminiAPICaller.Core\GeminiAPICaller.Core.csproj" />
+    <ProjectReference Include="..\GeminiAPICaller.Model\GeminiAPICaller.Model.csproj" />
+  </ItemGroup>
+
 </Project>
