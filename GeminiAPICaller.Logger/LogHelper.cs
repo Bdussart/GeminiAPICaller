@@ -11,6 +11,7 @@ namespace GeminiAPICaller.Logger
 
         static LogHelper()
         {
+
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile(path: "appSettings.json", optional: false, reloadOnChange: true)
@@ -25,9 +26,11 @@ namespace GeminiAPICaller.Logger
             _logger.Information($"[{callerName}]{message}");
         }
 
-        public static void LogException(Exception exception, [CallerMemberName] string callerName = "", object objectInfo = null)
+        public static void LogException(Exception exception, [CallerMemberName] string callerName = "", object customData = null)
         {
-            _logger.Error(exception, $"[{callerName}]{objectInfo?.ToString()} {exception.ToString()}");
+            _logger.Error(exception, $"[{callerName}] {exception.Message} ({exception.GetType().Name})" +
+                                       $"\nStackTrace: {exception.StackTrace}" +
+                                       (customData != null ? $"\nCustom Data: {customData}" : ""));
         }
         public static void LogDebug(string message, [CallerMemberName] string callerName = "")
         {

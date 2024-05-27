@@ -45,7 +45,7 @@ namespace GeminiAPICaller.Core
             }
             catch (Exception ex)
             {
-                Logger.LogHelper.LogException(ex, objectInfo: $"Url : {_completeUrl}, Message : {message}");
+                Logger.LogHelper.LogException(ex, customData: $"Url : {_completeUrl}, Message : {message}");
                 ExceptionDispatchInfo.Capture(ex).Throw();
 
             }
