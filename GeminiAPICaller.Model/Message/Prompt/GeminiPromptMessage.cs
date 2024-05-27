@@ -15,5 +15,15 @@ namespace GeminiAPICaller.Model.Message.Prompt
 
         [JsonProperty("systemInstruction")]
         public SystemInstruction SystemInstruction { get; set; }
+
+        public override string ToString()
+        {
+            string systemInfo = SystemInstruction != null ? SystemInstruction.ToString() : String.Empty;
+
+            string contentsInfo = Contents != null  && Contents.Any() ? string.Join('|', Contents): String.Empty;
+
+            return $"System Instruction : {systemInfo}, Contents : {contentsInfo} ";
+        }
+
     }
 }
