@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using GeminiAPICaller.Model;
 using GeminiAPICaller.Model.Message.Prompt;
 using GeminiAPICaller.Model.Response.Prompt;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 
 namespace GeminiAPICaller.WebService.Controllers
@@ -15,17 +16,24 @@ namespace GeminiAPICaller.WebService.Controllers
       
 
         [HttpGet(Name = "GetGeminiAnswer")]
-        public async Task<GeminiPromptResponse> Get([FromQuery]List<Part> informations, [FromQuery] string question)
+        public async Task<List<string>> Get([FromQuery]List<string> context, [FromQuery] string question)
         {
             GeminiPromptMessage geminiPromptBase = new GeminiPromptMessage();
-            GeminiPromptResponse reponse = null;
+            GeminiPromptResponse responses = null;
+            List<string> returns = new List<string>(); 
 
             Content content = new Content()
             {
                 Parts = new List<Part>()
             };
 
-            content.Parts = new List<Part>(informations);
+            Part part = new Part();
+
+            foreach (string information in context)
+            {
+                part.Text = information;
+                content.Parts.Add(part);
+            }
 
             geminiPromptBase.Contents = new List<Content> { content };
             geminiPromptBase.SystemInstruction = new SystemInstruction();
@@ -35,14 +43,22 @@ namespace GeminiAPICaller.WebService.Controllers
                 Text = question
             } };
 
-            reponse = await _caller.SendPromptAsync(geminiPromptBase);
+            responses = await _caller.SendPromptAsync(geminiPromptBase);
 
-            if(reponse!=null)
+            if(responses!=null)
                 Logger.LogHelper.LogInfo("answer received");
             else
                 Logger.LogHelper.LogInfo("no answer");
 
-            return reponse;
+            foreach (Candidate candidate in responses.Candidates)
+            {
+                foreach (Part tempPart in candidate.Content.Parts)
+                {
+                    returns.Add(tempPart.Text);
+                }
+            }
+
+            return returns;
 
         }
     }
