@@ -41,11 +41,13 @@ namespace GeminiAPICaller.Core
                 string content = Newtonsoft.Json.JsonConvert.SerializeObject(message);
 
                 HttpResponseMessage response = await client.PostAsync($"{_completeUrl}:generateContent?key={_apiKey}", new StringContent(content, Encoding.UTF8, "application/json"));
-                result = await HandleResponse< GeminiPromptResponse>(response);
+                result = await HandleResponse<GeminiPromptResponse>(response);
             }
             catch (Exception ex)
             {
+                Logger.LogHelper.LogException(ex, customData: $"Url : {_completeUrl}, Message : {message}");
                 ExceptionDispatchInfo.Capture(ex).Throw();
+
             }
             return result;
         }

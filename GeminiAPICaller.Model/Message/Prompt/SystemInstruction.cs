@@ -16,5 +16,11 @@ namespace GeminiAPICaller.Model.Message.Prompt
         [JsonProperty("parts")]
         public List<Part> Parts { get; set; }
 
+
+        public override string ToString()
+        {
+            string partsInfo = Parts != null && Parts.Any() ? string.Join('|', Parts) : String.Empty;
+            return $"Role : {Role}, Parts : {partsInfo}";
+        }
     }
 }
