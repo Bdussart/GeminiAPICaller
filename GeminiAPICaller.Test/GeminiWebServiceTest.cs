@@ -10,7 +10,7 @@ namespace GeminiAPICaller.Test
     public class GeminiWebServiceTest
     {
         private readonly HttpClient _httpClient;
-        private HttpResponseMessage response;
+        private HttpResponseMessage _response;
 
         [TestMethod]
         public async Task Test_Gemini_API()
@@ -26,19 +26,16 @@ namespace GeminiAPICaller.Test
             uriBuilder.Query = query.ToString();
 
             // Envoyer la requête GET
-
             try
             {
-                response = await _httpClient.GetAsync(uriBuilder.ToString());
+                _response = await _httpClient.GetAsync(uriBuilder.ToString());
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine(ex.Message);
+                _response = null;
             }
 
-
-            // Vérifier le succès de la réponse
-            response.EnsureSuccessStatusCode();
+            Assert.IsTrue(_response.IsSuccessStatusCode);
         }
     }
 }
