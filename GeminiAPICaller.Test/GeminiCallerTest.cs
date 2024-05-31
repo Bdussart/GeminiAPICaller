@@ -11,7 +11,7 @@ namespace GeminiAPICaller.Test
     [TestClass]
     public class GeminiCallerTest
     {
-       private GeminiAPICaller.Core.GeminiAPICaller _caller = new GeminiAPICaller.Core.GeminiAPICaller();
+        private GeminiAPICaller.Core.GeminiAPICaller _caller = new GeminiAPICaller.Core.GeminiAPICaller();
 
         [TestMethod]
         public async Task Test_Gemini_call()
@@ -22,7 +22,7 @@ namespace GeminiAPICaller.Test
             {
                 Parts = new List<Part>()
             };
-          
+
             content.Parts.AddPart("amberieu en bugey", "01", "189900", "95", "Maison", "A 15 mn de Ambérieu en Bugey en direction de Meximieux sur la commune de Saint Maurice de Rémens. Agréable maison de village comprenant 3 chambres ainsi qu'une mezzanine, une buanderie et un garage. Vous apprécierez également la proximité de l'école primaires, accessible en quelques minutes à pied garantissant un quotidien simplifié pour vos enfants. Pour les amoureux de la nature, plusieurs parcs et forêts sont à découvrir aux alentours, promettant de belles escapades en plein air.");
 
             geminiPromptBase.Contents = new List<Content> { content };
@@ -40,7 +40,7 @@ namespace GeminiAPICaller.Test
 
     }
     [TestClass]
-    public class GeminiAPITest() 
+    public class GeminiAPITest()
     {
         private readonly HttpClient _httpClient;
         private HttpResponseMessage response;
@@ -59,10 +59,10 @@ namespace GeminiAPICaller.Test
             uriBuilder.Query = query.ToString();
 
             // Envoyer la requête GET
-            
+
             try
             {
-               response = await _httpClient.GetAsync(uriBuilder.ToString());
+                response = await _httpClient.GetAsync(uriBuilder.ToString());
             }
             catch (Exception ex)
             {
@@ -74,4 +74,5 @@ namespace GeminiAPICaller.Test
             response.EnsureSuccessStatusCode();
         }
     }
- }
+
+}
