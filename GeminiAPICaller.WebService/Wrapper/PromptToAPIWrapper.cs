@@ -13,7 +13,7 @@ namespace GeminiAPICaller.WebService.Wrapper
         
         public async Task<HandleAPIResponse<GeminiPromptResponse>> PromptAPIWrapper(string informations, string context)
         {
-            HandleAPIResponse<GeminiPromptResponse> handleAPIResponse = null;
+            HandleAPIResponse<GeminiPromptResponse> handleAPIResponse = new HandleAPIResponse<GeminiPromptResponse>();
             GeminiPromptMessage geminiPromptBase = new GeminiPromptMessage();
             GeminiPromptResponse responses = null;
             string returns = "";

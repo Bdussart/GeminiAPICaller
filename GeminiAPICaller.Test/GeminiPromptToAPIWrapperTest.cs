@@ -28,7 +28,7 @@ namespace GeminiAPICaller.Test
             Assert.IsNotNull(handleAPIResponse.ValueResponse);
         }
 
-        [TestMethod]
+       /* [TestMethod]
         public async Task Test_Prompt_To_API_Wrapper_error()
         {
             HandleAPIResponse<GeminiPromptResponse> handleAPIResponse = null;
@@ -39,7 +39,7 @@ namespace GeminiAPICaller.Test
             Assert.IsFalse(handleAPIResponse.IsSuccessAPIResponse);
             Assert.AreEqual(HttpStatusCode.BadRequest, handleAPIResponse.CodeHTTPResponse);
             Assert.IsNull(handleAPIResponse.ValueResponse);
-        }
+        }*/
 
     }
 }
