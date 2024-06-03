@@ -4,6 +4,7 @@ using GeminiAPICaller.Model;
 using GeminiAPICaller.WebService.Handler;
 using Microsoft.VisualBasic;
 using System.Net;
+using Microsoft.AspNetCore.Routing.Matching;
 
 namespace GeminiAPICaller.WebService.Wrapper
 {
@@ -47,7 +48,8 @@ namespace GeminiAPICaller.WebService.Wrapper
             {
                 handleAPIResponse.IsSuccessAPIResponse = false;
                 handleAPIResponse.CodeHTTPResponse = HttpStatusCode.BadRequest;
-                handleAPIResponse.ValueResponse = null;
+                handleAPIResponse.ValueResponse = responses;
+                handleAPIResponse.ErrorMessage = ex.Message;
             }
 
             return handleAPIResponse;

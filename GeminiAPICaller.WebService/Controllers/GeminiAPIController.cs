@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using GeminiAPICaller.WebService.Wrapper;
 using Microsoft.VisualBasic;
 using GeminiAPICaller.WebService.Handler;
+using Microsoft.AspNetCore.Http;
 
 
 namespace GeminiAPICaller.WebService.Controllers
@@ -18,11 +19,11 @@ namespace GeminiAPICaller.WebService.Controllers
         private PromptToAPIWrapper _promptToAPIWrapper = new PromptToAPIWrapper();
 
         [HttpGet(Name = "GetGeminiAnswer")]
-        public async Task<string> Get(string informations, string context)
+        public async Task<ObjectResult> Get(string informations, string context)
         {
             HandleAPIResponse<GeminiPromptResponse> handleAPIResponse = await _promptToAPIWrapper.PromptAPIWrapper(informations, context);
             APIToPromptWrapper aPIToPromptWrapper = new APIToPromptWrapper();
-            return aPIToPromptWrapper.APIPromptWrapper(handleAPIResponse);
+            return StatusCode((int)handleAPIResponse.CodeHTTPResponse,aPIToPromptWrapper.APIPromptWrapper(handleAPIResponse));
         }
     }
 }
