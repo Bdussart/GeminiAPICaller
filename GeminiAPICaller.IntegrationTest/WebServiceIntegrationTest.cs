@@ -44,9 +44,9 @@ namespace GeminiAPICaller.IntegrationTest
             {
                 _response = await _httpClient.GetAsync(uriBuilder.ToString());
             }
-            catch
+            catch (Exception ex)
             {
-                
+                Console.WriteLine(ex.Message);
             }
 
             Assert.Equal(HttpStatusCode.OK, _response.StatusCode);
